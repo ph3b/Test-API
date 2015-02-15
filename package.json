@@ -1,0 +1,14 @@
+{
+  "name": "TwitterApi",
+  "main": "server.js",
+  "dependencies": {
+    "bcrypt": "^0.8.1",
+    "body-parser": "^1.11.0",
+    "expect.js": "^0.3.1",
+    "express": "^4.11.2",
+    "jsonwebtoken": "^3.2.2",
+    "jwt-simple": "^0.2.0",
+    "mysql": "^2.5.4",
+    "superagent": "^0.21.0"
+  }
+}
