@@ -4,9 +4,11 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var router = require('./routes/routes.js')
+var router = require('./routes/routes.js');
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 var cors = require('cors');
-
+require('./routes/socketRoutes.js')(io);
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -14,7 +16,8 @@ app.use(cors());
 
 var port = process.env.PORT || 8080;
 
-
 app.use('/v1', router);
-app.listen(port);
-console.log("Listening on port: " + port);
+http.listen(port, function(){
+    console.log("Listening on port: " + port);
+});
+

@@ -22,7 +22,7 @@ describe('Tweet tests', function(){
                     .set('x-auth', token)
                     .end(
                     function(err, res){
-                        expect(res.body.message).to.eql("Tweet added");
+                        expect(res.body.message).to.eql("Hello!");
                         expect(res.body.tweetid).to.be.a('number');
                         done();
                     }

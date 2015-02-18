@@ -3,16 +3,12 @@
  */
 var express = require('express');
 var jwt = require('jsonwebtoken');
-var bcrypt = require('bcrypt');
 
-var addTweetToDb = require('./handlers/addTweetToDb.js');
+var addTweet = require('./handlers/addTweet.js');
 var checkCredentials = require('./handlers/checkCredentials.js');
 var createNewUser = require('./handlers/createNewUser.js');
 var getTweets = require('./handlers/getTweets.js');
-
 var auth = require('../config/auth.js');
-
-
 
 var router = express.Router();
 
@@ -20,7 +16,7 @@ router.post('/login', checkCredentials);
 
 router.post('/signup', createNewUser);
 
-router.post('/tweet', isAuthenticated, addTweetToDb);
+router.post('/tweet', isAuthenticated, addTweet);
 
 router.get('/tweet', getTweets);
 
@@ -28,11 +24,6 @@ router.post('/post', function(req, res){
     res.status(200);
     res.send(req.body);
 });
-
-module.exports = router;
-
-
-var secret = auth.tokenSecret;
 
 function isAuthenticated(req, res, next){
     var errorMsg = {"message":"not authenticated"}
@@ -46,3 +37,7 @@ function isAuthenticated(req, res, next){
         }
     });
 }
+
+var secret = auth.tokenSecret;
+
+module.exports = router;
